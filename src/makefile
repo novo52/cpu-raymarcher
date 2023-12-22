@@ -21,6 +21,3 @@ mat4.o: mat4.cc
 clean:
 	rm *.o main
 
-render-video:
-	ffmpeg -framerate $$(cat ../output/framerate.var) -i ../output/%d.ppm -c:v libx264 -crf 15 -pix_fmt yuv420p ../output/output.mp4 -y
-	cvlc ../output/output.mp4 --loop
