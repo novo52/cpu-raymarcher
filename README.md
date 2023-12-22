@@ -14,4 +14,4 @@ Clone the repo and run `make` in the `src` folder to get the executable, `./main
 
 # Examples
 
-![](./media/high_quality_donut.mp4)
+[![](./media/high_quality_donut.gif)](./media/high_quality_donut.mp4)
