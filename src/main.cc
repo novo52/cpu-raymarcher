@@ -211,14 +211,18 @@ int main() {
 
 	std::string path = "../output";
 
-	// Remove previous output and write framerate
+	// Setup output
 	std::stringstream command;
+	command << "mkdir -p " << path;
+	std::cerr << "Creating output directory\n";
+	system(command.str().c_str());
+	std::stringstream().swap(command);
 	command << "rm " << path << "/*.ppm";
-	std::cerr << command.str() << "\n";
+	std::cerr << "Removing existing output\n";
 	system(command.str().c_str());
 	std::stringstream().swap(command);
 	command << "echo \"" << framerate << "\" > " << path << "/framerate.var";
-	std::cerr << command.str() << "\n";
+	std::cerr << "Saving framerate\n";
 	system(command.str().c_str());	
 
 	auto start = std::chrono::high_resolution_clock::now();
