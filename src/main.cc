@@ -34,7 +34,7 @@ vec3 estimate_normal(point3 p) {
 		scene_distance(p + EPSILON_X) - scene_distance(p - EPSILON_X),
 		scene_distance(p + EPSILON_Y) - scene_distance(p - EPSILON_Y),
 		scene_distance(p + EPSILON_Z) - scene_distance(p - EPSILON_Z));
-	//std::cerr << normal << " ";
+	//std::cout << normal << " ";
 	return normalize(normal);
 }
 
@@ -63,7 +63,7 @@ color ray_color(const ray& r, double time) {
 	const point3 camera_pos = point3(sin(time), 0.5, cos(time));
 	const mat4 view_to_world = view(camera_pos, point3(), vec3(0.0, 1.0, 0.0));
 	//const mat4 view_to_world = unit();
-	//std::cerr << "\nMatrix:\n" << view_to_world << "\n";	
+	//std::cout << "\nMatrix:\n" << view_to_world << "\n";	
 	ray r_transformed = ray(camera_pos, normalize(view_to_world * r.direction()));	
 
 	const color ambient_light = color(0.5, 0.5, 0.5);
@@ -78,7 +78,7 @@ color ray_color(const ray& r, double time) {
 	// Experimentally found to give closest result to raytracing with no antialiasing
 	const double epsilon = 0.00075; 
 	double t = 0;
-	//if (debug_print) std::cerr << "New ray:\n";
+	//if (debug_print) std::cout << "New ray:\n";
 	const int MAX_ITERATIONS = 255;
 	const double MAX_DIST = 3.0;
 
@@ -180,7 +180,7 @@ void render_sequence(std::string path, int img_width, int img_height, int frame_
 		if (f%THREAD_COUNT == 0) {
 			int last_frame = f+THREAD_COUNT;
 			if (last_frame > frame_count-1) last_frame = frame_count-1;
-			std::cerr << "Rendering frames " << f << " to " << last_frame << "\n";
+			std::cout << "Rendering frames " << f << " to " << last_frame << "\n";
 			for (int i = 0; i < THREAD_COUNT; i++) {
 				if (threads[i].joinable()) threads[i].join();
 			}
@@ -193,7 +193,7 @@ void render_sequence(std::string path, int img_width, int img_height, int frame_
 		if (threads[i].joinable()) threads[i].join();
 	}
 
-	std::cerr << "Render complete\n";
+	std::cout << "Render complete\n";
 }
 
 
@@ -214,15 +214,15 @@ int main() {
 	// Setup output
 	std::stringstream command;
 	command << "mkdir -p " << path;
-	std::cerr << "Creating output directory\n";
+	std::cout << "Creating output directory\n";
 	system(command.str().c_str());
 	std::stringstream().swap(command);
 	command << "rm " << path << "/*.ppm";
-	std::cerr << "Removing existing output\n";
+	std::cout << "Removing existing output\n";
 	system(command.str().c_str());
 	std::stringstream().swap(command);
 	command << "echo \"" << framerate << "\" > " << path << "/framerate.var";
-	std::cerr << "Saving framerate\n";
+	std::cout << "Saving framerate\n";
 	system(command.str().c_str());	
 
 	auto start = std::chrono::high_resolution_clock::now();
@@ -232,6 +232,6 @@ int main() {
 	auto end = std::chrono::high_resolution_clock::now();
 	double duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() / 1000.0f;
 
-	std::cerr << "Render time: " << duration << "s (" << duration/frame_count \
+	std::cout << "Render time: " << duration << "s (" << duration/frame_count \
 		<< "s/frame)\n";
 }
