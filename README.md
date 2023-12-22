@@ -14,6 +14,5 @@ Clone the repo and run `make` in the `src` folder to get the executable, `./main
 
 # Examples
 
-GIF Preview (click for high resolution mp4)
+https://github.com/novo52/cpu-raymarcher/assets/22119302/48348e80-9a32-48df-8bbd-952d259fc84d
 
-[![](./media/lower_quality_donut.gif)](./media/high_quality_donut.mp4)
