@@ -199,12 +199,12 @@ void render_sequence(std::string path, int img_width, int img_height, int frame_
 
 int main() {
 	const double ideal_aspect_ratio = 16.0 / 9.0;
-	int img_width = 1080;
+	int img_width = 400;
 	int img_height = img_width / ideal_aspect_ratio;
 	img_height -= img_height%2;
 
-	double seconds = 6.2831855;
-	double framerate = 60;
+	double seconds = 6.283185307179586;
+	double framerate = 15;
 	
 	int frame_count = framerate * seconds;
 	double frame_delta = 1.0/framerate;
